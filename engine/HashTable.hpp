@@ -54,10 +54,12 @@ private:
             while (cur!=NULL){
                 Node* next=cur->next;
                 int idx;
-                if (cur->isIntKey)
+                if (cur->isIntKey){
                     idx=hashInt(cur->intKey, numBuckets);
-                else
+                }
+                else{
                     idx=hashStr(cur->strKey, numBuckets);
+                }
                 cur->next=buckets[idx];
                 buckets[idx]=cur;
                 count++;
@@ -84,7 +86,9 @@ public:
 
     //insert with int key
     void insert(int key, const V& value){
-        if ((double)count/numBuckets>0.75) rehash();
+        if ((double)count/numBuckets>0.75){
+            rehash();
+        }
 
         int idx=hashInt(key, numBuckets);
         Node* cur=buckets[idx];
@@ -211,14 +215,17 @@ public:
 
     void display(){
         for (int i=0;i<numBuckets;i++){
-            if (buckets[i]==NULL) continue;
+            if (buckets[i]==NULL){
+                continue;
+            }
             cout<<"Bucket "<<i<<": ";
             Node* cur=buckets[i];
             while (cur!=NULL){
                 if (cur->isIntKey)
                     cout<<"("<<cur->intKey<<","<<cur->value<<") ";
-                else
+                else{
                     cout<<"("<<cur->strKey<<","<<cur->value<<") ";
+                }
                 cur=cur->next;
             }
             cout<<"\n";
