@@ -48,8 +48,12 @@ public:
 
     //copy assignment operator
     MiniVector& operator=(const MiniVector& other){
-        if (this==&other) return *this;
-        for (int i=0;i<sz;i++) ptr(i)->~T();
+        if (this==&other){
+            return *this;
+        }
+        for (int i=0;i<sz;i++){
+            ptr(i)->~T();
+        }
         delete[] raw;
         sz=other.sz;
         cap=other.cap;
@@ -62,7 +66,9 @@ public:
 
     //destructor
     ~MiniVector(){
-        for (int i=0;i<sz;i++) ptr(i)->~T();
+        for (int i=0;i<sz;i++){
+            ptr(i)->~T();
+        }
         delete[] raw;
         raw=NULL;
     }
@@ -91,7 +97,9 @@ public:
 
     //clear everything
     void clear(){
-        for (int i=0;i<sz;i++) ptr(i)->~T();
+        for (int i=0;i<sz;i++){
+            ptr(i)->~T();
+        }
         sz=0;
     }
 
