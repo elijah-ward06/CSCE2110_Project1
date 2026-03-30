@@ -1,80 +1,43 @@
-#ifndef DRIVER_HPP
-#define DRIVER_HPP
-
+#include "driver.hpp"
 #include <iostream>
-#include <string>
-#include "../tools/date.hpp"
-#include "../tools/location.hpp"
-#include "tickets.hpp"
-#include "minivector.hpp"
 using namespace std;
 
-class Driver {
-protected:
-    int id;
-    string name;
-    Date dob;
-    Location location;
-    string workType;
-    int experienceYears;
-    string medicalCondition;
-    Date licenseDate;
-    Tickets tickets;
+Driver::Driver(int id, string name, Date dob, Location loc,
+               string work, int exp, string med, Date licenseDate){
+    this->id = id;
+    this->name = name;
+    this->dob = dob;
+    this->location = loc;
+    this->workType = work;
+    this->experienceYears = exp;
+    this->medicalCondition = med;
+    this->licenseDate = licenseDate;
+}
 
-private:
-    MiniVector<Location> frequentLocations;  // most frequently visited locations
+int Driver::getID(){
+    return id;
+}
 
-public:
-    // Constructor
-    Driver(int id, string name, Date dob, Location loc,
-           string work, int exp, string med, Date licenseDate){
-        this->id = id;
-        this->name = name;
-        this->dob = dob;
-        this->location = loc;
-        this->workType = work;
-        this->experienceYears = exp;
-        this->medicalCondition = med;
-        this->licenseDate = licenseDate;
-    }
+Date Driver::getLicenseDate(){
+    return licenseDate;
+}
 
-    int getID() { return id; }
-    Date getLicenseDate() { return licenseDate; }
+void Driver::addTicket(Ticket t){
+    tickets.Insert(t);
+}
 
-    void addTicket(Ticket t) { tickets.Insert(t); }
-    Tickets& getTickets() { return tickets; }
+Tickets& Driver::getTickets(){
+    return tickets;
+}
 
-    void addLocation(const Location& loc) { frequentLocations.push_back(loc); }
-    MiniVector<Location>& getFrequentLocations() { return frequentLocations; }
+void Driver::addLocation(const Location& loc){
+    frequentLocations.push_back(loc);
+}
 
-    void display(){
-        cout << "ID: " << id << " Name: " << name << endl;
-    }
-};
+MiniVector<Location>& Driver::getFrequentLocations(){
+    return frequentLocations;
+}
 
-// ----------------- Derived Categories ------------------
-
-// Age-based
-class YouthDriver : public Driver { public: using Driver::Driver; };
-class MiddleAgedDriver : public Driver { public: using Driver::Driver; };
-class SeniorDriver : public Driver { public: using Driver::Driver; };
-
-// Work-based
-class StudentDriver : public Driver { public: using Driver::Driver; };
-class GovtEmployeeDriver : public Driver { public: using Driver::Driver; };
-class SelfEmployedDriver : public Driver { public: using Driver::Driver; };
-class BusinessOwnerDriver : public Driver { public: using Driver::Driver; };
-class PrivateEmployeeDriver : public Driver { public: using Driver::Driver; };
-
-// Experience-based
-class NewDriver : public Driver { public: using Driver::Driver; };
-class ModerateDriver : public Driver { public: using Driver::Driver; };
-class HighlyExperiencedDriver : public Driver { public: using Driver::Driver; };
-
-// Medical-condition-based
-class FitDriver : public Driver { public: using Driver::Driver; };
-class VisionImpairedDriver : public Driver { public: using Driver::Driver; };
-class UpperExtremityDriver : public Driver { public: using Driver::Driver; };
-class LocomotorDriver : public Driver { public: using Driver::Driver; };
-
-#endif
+void Driver::display(){
+    cout << "ID: " << id << " Name: " << name << endl;
+}
