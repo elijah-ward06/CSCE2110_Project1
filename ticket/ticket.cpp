@@ -4,6 +4,11 @@
 #include "../tools/location.hpp"
 #include <string>
 
+Ticket::Ticket(){
+    this->reason = "none";
+    this->date = Date();
+}
+
 Ticket::Ticket(std::string r, Date d, Location l){
     this->reason = r;
     this->date = d;
