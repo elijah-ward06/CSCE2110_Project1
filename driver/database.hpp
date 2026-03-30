@@ -2,9 +2,9 @@
 #define DATABASE_HPP
 
 #include "driver.hpp"
-#include "structures/hashtable.hpp"
-#include "structures/minivector.hpp"
-#include "structures/licensesorter.hpp"
+#include "engine/HashTable.hpp"
+#include "engine/MiniVector.hpp"
+#include "engine/LicenseSorter.hpp"
 
 class DriverDatabase {
 private:
