@@ -11,6 +11,7 @@ class Ticket{
         Date date;
         Location location;
     public:
+        Ticket();
         Ticket(std::string r, Date d, Location l);
         
         //Ticket that defaults to current date
