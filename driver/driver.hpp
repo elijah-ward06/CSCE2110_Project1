@@ -1,62 +1,63 @@
 #ifndef DRIVER_HPP
 #define DRIVER_HPP
 
+#include <iostream>
+#include <string>
 #include "../tools/date.hpp"
 #include "../tools/location.hpp"
-#include "../tickets/tickets.hpp"
-#include "../structures/minivector.hpp"
-#include <string>
-
-enum class AgeCategory { Youth, MiddleAged, Senior };
-enum class WorkCategory { Student, GovtEmployee, SelfEmployed, BusinessOwner, PrivateEmployee };
-enum class ExperienceCategory { NewDriver, ModerateDriver, HighlyExperiencedDriver };
-enum class MedicalCondition { Fit, VisionImpaired, UpperExtremity, Locomotor };
+#include "tickets.hpp"
+#include "minivector.hpp"
+using namespace std;
 
 class Driver {
 protected:
     int id;
-    std::string name;
+    string name;
     Date dob;
-    Location address;
-    AgeCategory ageCat;
-    WorkCategory workCat;
-    ExperienceCategory expCat;
-    MedicalCondition medCond;
+    Location location;
+    string workType;
+    int experienceYears;
+    string medicalCondition;
     Date licenseDate;
+    Tickets tickets;
 
-    Tickets tickets; // composition
+private:
     MiniVector<Location> frequentLocations;
 
 public:
-    Driver(int id, const std::string& name, const Date& dob, const Location& addr,
-           AgeCategory ageCat, WorkCategory workCat, ExperienceCategory expCat,
-           MedicalCondition medCond, const Date& licenseDate)
-        : id(id), name(name), dob(dob), address(addr),
-          ageCat(ageCat), workCat(workCat), expCat(expCat),
-          medCond(medCond), licenseDate(licenseDate) {}
+    Driver(int id, string name, Date dob, Location loc,
+           string work, int exp, string med, Date licenseDate);
 
-    virtual ~Driver() {}
-
-    int getID() const { return id; }
-    std::string getName() const { return name; }
-    Date getDOB() const { return dob; }
-    Location getAddress() const { return address; }
-    AgeCategory getAgeCategory() const { return ageCat; }
-    WorkCategory getWorkCategory() const { return workCat; }
-    ExperienceCategory getExpCategory() const { return expCat; }
-    MedicalCondition getMedicalCondition() const { return medCond; }
-    Date getLicenseDate() const { return licenseDate; }
-
-    Tickets& getTickets() { return tickets; }
-    MiniVector<Location>& getFrequentLocations() { return frequentLocations; }
-
-    void addTicket(const Ticket& t) {
-        tickets.Insert(t);
-    }
-
-    void addLocation(const Location& loc) {
-        frequentLocations.push_back(loc);
-    }
+    int getID();
+    Date getLicenseDate();
+    void addTicket(Ticket t);
+    Tickets& getTickets();
+    void addLocation(const Location& loc);
+    MiniVector<Location>& getFrequentLocations();
+    void display();
 };
+
+// Derived classes
+class YouthDriver : public Driver { public: using Driver::Driver; };
+class MiddleAgedDriver : public Driver { public: using Driver::Driver; };
+class SeniorDriver : public Driver { public: using Driver::Driver; };
+
+// Work-based
+class StudentDriver : public Driver { public: using Driver::Driver; };
+class GovtEmployeeDriver : public Driver { public: using Driver::Driver; };
+class SelfEmployedDriver : public Driver { public: using Driver::Driver; };
+class BusinessOwnerDriver : public Driver { public: using Driver::Driver; };
+class PrivateEmployeeDriver : public Driver { public: using Driver::Driver; };
+
+// Experience-based
+class NewDriver : public Driver { public: using Driver::Driver; };
+class ModerateDriver : public Driver { public: using Driver::Driver; };
+class HighlyExperiencedDriver : public Driver { public: using Driver::Driver; };
+
+// Medical-condition-based
+class FitDriver : public Driver { public: using Driver::Driver; };
+class VisionImpairedDriver : public Driver { public: using Driver::Driver; };
+class UpperExtremityDriver : public Driver { public: using Driver::Driver; };
+class LocomotorDriver : public Driver { public: using Driver::Driver; };
 
 #endif
