@@ -1,6 +1,8 @@
 #ifndef LICENSESORTER_HPP
 #define LICENSESORTER_HPP
 
+#include "tools/date.hpp"
+
 // get  N most recent or oldest drivers
 template <typename Driver>
 class LicenseSorter{
