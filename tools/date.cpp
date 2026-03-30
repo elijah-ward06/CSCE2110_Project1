@@ -10,11 +10,23 @@ Date::Date(){
 }
 
 // M/D/Y
-Date::Date(std::string input){
+/*Date::Date(std::string input){
     this->Month = stoi(input.substr(0, input.find("/")));
     input.erase(input.find("/"));
     this->Day = stoi(input.substr(0, input.find("/")));
     input.erase(input.find("/"));
+    this->Year = stoi(input);
+}*/
+
+//above code block was erasing from the first / to the end of the string -aliaan
+Date::Date(std::string input){
+    size_t p;
+    p = input.find("/");
+    this->Month = stoi(input.substr(0, p));
+    input = input.substr(p + 1);
+    p = input.find("/");
+    this->Day = stoi(input.substr(0, p));
+    input = input.substr(p + 1);
     this->Year = stoi(input);
 }
 
