@@ -25,6 +25,8 @@ Date Ticket::getDate(){
     return this->date;
 }
 
+Ticket::~Ticket(){}
+
 Location Ticket::getLocation(){
     return this->location;
 }
