@@ -20,7 +20,6 @@ void displayMenu() {
 
 int main(){
   DriverDatabase db;
-  // Need to make
       int choice;
     do {
         displayMenu();
